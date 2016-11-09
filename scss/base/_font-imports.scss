@@ -1,0 +1,37 @@
+// $import-keys:(
+// 	montserratlight:(
+// 		name:'montserrat',
+// 		family:'montserratlight',
+// 		source:'montserrat-light-webfont'
+// 	),
+// 	montserratregular:(
+// 		name:'montserrat',
+// 		family:'montserratregular',
+// 		source:'montserrat-regular-webfont'
+// 	),
+// 	montserratsemibold:(
+// 		name:'montserrat',
+// 		family:'montserratsemibold',
+// 		source:'montserrat-semibold-webfont'
+// 	),
+// 	montserratbold:(
+// 		name:'montserrat',
+// 		family:'montserratbold',
+// 		source:'montserrat-bold-webfont'
+// 	)
+// );
+//
+// @mixin font-import($name, $family, $source){
+// 	font-family:$family;
+// 	src:url('../fonts/#{$name}/#{$source}.eot');
+// 	src:url('../fonts/#{$name}/#{$source}.eot?#iefix') format('embedded-opentype'), url('../fonts/#{$name}/#{$source}.woff2') format('woff2'), url('../fonts/#{$name}/#{$source}.woff') format('woff'), url('../fonts/#{$name}/#{$source}.tff') format('truetype');
+// }
+//
+// $import-types: map_keys($import-keys);
+// @each $font in $import-types{
+// 	@font-face{
+// 		@include font-import((
+// 			map-get($import-keys, $font)
+// 		)...);
+// 	}
+// }
