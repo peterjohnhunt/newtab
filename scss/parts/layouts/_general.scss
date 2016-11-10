@@ -7,94 +7,164 @@ body{
 .main{
 	height:100%;
 	width:100%;
-	padding:40px;
+	padding:25px;
 	box-sizing:border-box;
+	overflow:hidden;
 }
 
 .backgrounds{
 	position:relative;
-	box-shadow:0 0 10px 0 rgba(0,0,0,0.4);
 	width:100%;
 	height:100%;
 
-
 	.piece{
-		position:absolute;
-		top:0;
-		left:0;
-		width:100%;
-		height:100%;
-		background-image:url('https://source.unsplash.com/category/nature');
-		background-size:cover;
-		background-repeat:no-repeat;
-		background-position:50% 50%;
-	}
+		@include ease;
 
-	.top{
-		@include prefix(clip-path,inset(0 0 calc(50% + 132px) 0));
-	}
+		&:before,
+		&:after{
+			@include ease;
+			content:"";
+			display:block;
+			position:absolute;
+			left:0;
+			width:100%;
+			height:100%;
+			background-image:url('https://source.unsplash.com/category/nature');
+			background-size:cover;
+			background-repeat:no-repeat;
+			background-position:50% 50%;
+		}
 
-	.mid{
-		@include prefix(clip-path,inset(calc(50% - 132px) 0 calc(50% - 132px) 0));
-	}
+		&.top,
+		&.bot{
+			cursor:pointer;
 
-	.bot{
-		@include prefix(clip-path,inset(calc(50% + 132px) 0 0 0));
-	}
+			&:before,
+			&:after{
+				z-index:z(base);
+			}
 
-	.blur{
-		@include prefix(filter, blur(10px));
-		@include prefix(clip-path,inset(calc(50% - 132px) 0 calc(50% - 132px) 0));
-		z-index:z(floor);
-	}
+			&.open{
+				cursor:default;
 
+				&:after{
+					@include prefix(filter, blur(5px));
+				}
+
+				.content{
+					opacity:1;
+				}
+			}
+
+			.content{
+				@include ease;
+				opacity:0;
+				position:relative;
+				padding:71px 0;
+				height:100%;
+				box-sizing:border-box;
+				z-index:z(base);
+
+				&:before{
+					@include ease;
+					content:"";
+					position:absolute;
+					left:0;
+					height:100%;
+					width:100%;
+					box-shadow:0 0 10px 0 rgba(0,0,0,0.2);
+				}
+			}
+		}
+
+		&.top{
+			height:calc(50% - 132px);
+
+			&:before,
+			&:after{
+				bottom:0;
+				@include prefix(clip-path,inset(0 0 calc(50% + 132px) 0));
+			}
+
+			.content:before{
+				bottom:0;
+			}
+
+			&.open{
+				&:before,
+				&:after{
+					bottom:calc(50% - 132px);
+				}
+
+				.content{
+					&:before{
+						bottom:100%;
+					}
+				}
+			}
+		}
+
+		&.mid{
+			height:264px;
+
+			&:before,
+			&:after{
+				top:0;
+				z-index:z(behind);
+				@include prefix(clip-path,inset(calc(50% - 132px) 0 calc(50% - 132px) 0));
+			}
+
+			&:after{
+				@include prefix(filter, blur(5px));
+			}
+
+			.content{
+				position:relative;
+				padding:100px 0;
+				height:100%;
+				box-sizing:border-box;
+				z-index:z(base);
+				box-shadow:0 0 10px 0 rgba(0,0,0,0.2);
+
+				&:before{
+					@include bg(white);
+					content:"";
+					position:absolute;
+					top:0;
+					left:0;
+					height:100%;
+					width:100%;
+					opacity:0.4;
+				}
+			}
+		}
+
+		&.bot{
+			height:calc(50% - 132px);
+			cursor:pointer;
+
+			&:before,
+			&:after{
+				top:0;
+				@include prefix(clip-path,inset(calc(50% + 132px) 0 0 0));
+			}
+
+			.content:before{
+				top:0;
+			}
+
+			&.open{
+				&:before,
+				&:after{
+					top:calc(50% - 132px);
+				}
+
+				.content{
+					&:before{
+						top:100%;
+					}
+				}
+			}
+		}
+	}
 }
-
-.content{
-	position:absolute;
-	top:50%;
-	left:0;
-	padding:100px 0;
-	width:100%;
-	transform:translateY(-50%);
-	-webkit-transform:translateY(-50%);
-	-moz-transform:translateY(-50%);
-	-o-transform:translateY(-50%);
-	-ms-transform:translateY(-50%);
-	z-index:z(mid);
-	box-shadow:0 0 10px 0 rgba(0,0,0,0.2);
-
-	&:before{
-		@include bg(white);
-		content:"";
-		position:absolute;
-		top:0;
-		left:0;
-		height:100%;
-		width:100%;
-		opacity:0.4;
-	}
-
-	h1{
-		font-family:'Roboto', sans-serif;
-		color:white;
-		font-size:4em;
-		text-align:center;
-		letter-spacing:0.15em;
-		text-transform:uppercase;
-		text-shadow:0 2px 5px rgba(0,0,0,0.3);
-	}
-}
-
-
-
-// .blur{
-// 	position:absolute;
-// 	top:0;
-// 	left:0;
-// 	height:100%;
-// 	width:100%;
-// 	background-color:white;
-// 	opacity:0.5;
-// }
-
